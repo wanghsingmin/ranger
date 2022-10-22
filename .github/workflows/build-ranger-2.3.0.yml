@@ -3,7 +3,7 @@ on:
   push:
     branches: [ march-release-ranger-2.3.0 ]
 jobs:
-  build-hbase:
+  build-Ranger:
     runs-on: ubuntu-20.04
     #https://github.com/actions/runner-images
     steps:
@@ -15,9 +15,9 @@ jobs:
         run: lsb_release -a && uname -a
       - name: install openjdk-8-jdk
         run: sudo apt-get -y install openjdk-8-jdk
-      - name: build hbase-2.4.14 with Hadoop 3.3.1 and build the Tarballs
+      - name: build release-ranger-2.3.0 
         env:
           JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
-        run: mvn -DskipJSTests clean compile package install assembly:single
+        run: mvn -DskipJSTests -DskipTests clean compile package install assembly:assembly
 
 
