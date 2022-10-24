@@ -18,7 +18,6 @@ jobs:
       - name: build release-ranger-2.3.0 
         env:
           JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
-        #run: mvn -DskipJSTests -DskipTests clean compile package install assembly:assembly
         run: mvn -DskipJSTests -DskipTests clean compile package install
       - name: check TAR files
         run: find / -name "ranger-*.tar.gz"
