@@ -15,19 +15,19 @@ jobs:
     runs-on: ubuntu-20.04
     #https://github.com/actions/runner-images
     steps:
-      - name: Checkout tag release-ranger-2.3.0
+      - name: Checkout tag release-ranger-2.2.0
         uses: actions/checkout@v3
         with:
-          ref: release-ranger-2.3.0
+          ref: release-ranger-2.2.0
       - name: check kernel version info  
         run: lsb_release -a && uname -a
       - name: install openjdk-8-jdk
         run: sudo apt-get -y install openjdk-8-jdk
-      - name: build release-ranger-2.3.0 
+      - name: build release-ranger-2.2.0 
         env:
           JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
         #run: mvn -DskipJSTests -DskipTests clean compile package install
-        run: mvn -e -X clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
+        run: mvn -e clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
       - name: check TAR files
         run: find / -name "ranger-*.tar.gz"
 
