@@ -1,5 +1,14 @@
 name: Ranger-build-workflow
 on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'  
+on: 
   push:
     branches: [ march-release-ranger-2.3.0 ]
 jobs:
@@ -19,7 +28,7 @@ jobs:
         env:
           JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
         #run: mvn -DskipJSTests -DskipTests clean compile package install
-        run: mvn clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
+        run: mvn -e -X clean compile package install -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
       - name: check TAR files
         run: find / -name "ranger-*.tar.gz"
 
