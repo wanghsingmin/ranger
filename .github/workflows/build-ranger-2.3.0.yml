@@ -21,11 +21,13 @@ jobs:
           ref: release-ranger-2.2.0
       - name: check kernel version info  
         run: lsb_release -a && uname -a
-      - name: install openjdk-8-jdk
-        run: sudo apt-get -y install openjdk-8-jdk
+      - name: check jdk version 
+        run: java -version
+      #- name: install openjdk-8-jdk
+      #  run: sudo apt-get -y install openjdk-8-jdk
       - name: build release-ranger-2.2.0 
-        env:
-          JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+        #env:
+        #  JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
         #run: mvn -DskipJSTests -DskipTests clean compile package install
         run: mvn clean compile package -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
       - name: check TAR files
