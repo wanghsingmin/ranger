@@ -24,5 +24,3 @@ jobs:
         run: mvn clean compile package -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
       - name: check TAR files
         run: sudo find / -name "ranger-*.tar.gz"
-
-
