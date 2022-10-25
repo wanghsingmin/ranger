@@ -3,6 +3,7 @@ on:
   push:
     branches: 
       - 'march-release-ranger-2.3.0'
+    tags: 
       - 'march-test-2.3.0'
 jobs:
   build-Ranger:
