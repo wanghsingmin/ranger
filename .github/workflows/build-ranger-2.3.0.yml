@@ -1,7 +1,7 @@
 name: Ranger-build-workflow
 on:  
   push:
-    branches: [ march-.* ]
+    branches: [ march-* ]
 jobs:
   build-Ranger:
     runs-on: ubuntu-20.04
