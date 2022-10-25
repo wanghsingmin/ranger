@@ -1,13 +1,5 @@
 name: Ranger-build-workflow
-on: 
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Test scenario tags'  
+on:  
   push:
     branches: [ march-release-ranger-2.3.0 ]
 jobs:
