@@ -27,3 +27,16 @@ jobs:
         run: mvn clean compile package -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
       - name: check TAR files
         run: sudo find / -name "ranger-*.tar.gz"
+      - name: make folder for save assembly files
+        run: mkdir ./Ranger-Release-HBase-2.4.14
+      - name: move Tarballs to release folder
+        run: cp /home/runner/work/ranger/ranger/target/*.tar.gz ./Ranger-Release-HBase-2.4.14/
+      - name: move examples Tarballs to release folder
+        run: cp /home/runner/work/ranger/ranger/ranger-examples/target/*.tar.gz ./Ranger-Release-HBase-2.4.14/
+      - name: check Ranger-Release-HBase-2.4.14 TAR files
+        run: ls -al ./Ranger-Release-HBase-2.4.14/
+      - name: upload-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Package_Ranger-Release-HBase-2.4.14
+          path: ./myRelease/
