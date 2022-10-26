@@ -1,0 +1,42 @@
+name: Ranger-build-workflow
+on:  
+  push:
+    branches: 
+      - 'march-release-ranger-2.3.0'
+    tags: 
+      - 'march-test-2.3.0'
+jobs:
+  build-Ranger:
+    runs-on: ubuntu-20.04
+    #https://github.com/actions/runner-images  
+    steps:
+      - name: Checkout tag release-ranger-2.3.0
+        uses: actions/checkout@v3
+        with:
+          ref: march-test-2.3.0
+      - name: check kernel version info  
+        run: lsb_release -a && uname -a
+      - name: check jdk version 
+        run: java -version
+      - name: install openjdk-8-jdk
+        run: sudo apt-get -y install openjdk-8-jdk
+      - name: build release-ranger-2.3.0 
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
+        #run: mvn -DskipJSTests -DskipTests clean compile package install
+        run: mvn clean compile package -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
+      - name: check TAR files
+        run: sudo find / -name "ranger-*.tar.gz"
+      - name: make folder for save assembly files
+        run: mkdir ./Ranger-Release-HBase-2.4.14
+      - name: move Tarballs to release folder
+        run: cp /home/runner/work/ranger/ranger/target/*.tar.gz ./Ranger-Release-HBase-2.4.14/
+      - name: move examples Tarballs to release folder
+        run: cp /home/runner/work/ranger/ranger/ranger-examples/target/*.tar.gz ./Ranger-Release-HBase-2.4.14/
+      - name: check Ranger-Release-HBase-2.4.14 TAR files
+        run: ls -al ./Ranger-Release-HBase-2.4.14/
+      - name: upload-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Package_Ranger-Release-HBase-2.4.14
+          path: ./Ranger-Release-HBase-2.4.14
