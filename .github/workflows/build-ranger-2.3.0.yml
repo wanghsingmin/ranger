@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Package_Ranger-Release-HBase-2.4.14
-          path: ./myRelease/
+          path: ./Ranger-Release-HBase-2.4.14
