@@ -62,7 +62,7 @@ jobs:
           filename: Package_Ranger-Release-2.3.0-HBase-2.4.14.tar.gz
           path: ./artifacts
           directory: './'
-      - name: check Archive filpath es
+      - name: check Archive files path
         run: ls -alh -R ./
       - name: Create Release
         id: create_ranger_release
@@ -70,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.run_number }}
+          tag_name: Ranger-2.3.0-HBase-2.4.14.v${{ github.run_number }}
           release_name: Ranger-Release-2.3.0-HBase-2.4.14.v${{ github.run_number }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
