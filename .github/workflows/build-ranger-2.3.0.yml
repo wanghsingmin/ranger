@@ -43,7 +43,7 @@ jobs:
           path: ./Ranger-Release-HBase-2.4.14
   release-project:
     name: Release Project Apache Ranger 2.3
-    need: build-Ranger
+    needs: build-Ranger
     runs-on: ubuntu-20.04
     steps:
       - name: Download Artifact
