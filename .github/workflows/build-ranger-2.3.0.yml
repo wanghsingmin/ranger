@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Download Artifact
-        use: actions/download-artifact@v3
+        uses: actions/download-artifact@v3
         with: 
           name: Package_Ranger-Release-HBase-2.4.14
       - name: Archive Release Content
