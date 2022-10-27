@@ -7,6 +7,7 @@ on:
       - 'march-test-2.3.0'
 jobs:
   build-Ranger:
+    name: Build Ranger 2.3 with Hadoop 3.3.1 and HBase 2.4.14
     runs-on: ubuntu-20.04
     #https://github.com/actions/runner-images  
     steps:
@@ -40,3 +41,17 @@ jobs:
         with:
           name: Package_Ranger-Release-HBase-2.4.14
           path: ./Ranger-Release-HBase-2.4.14
+  release-project:
+    name: Release Project Apache Ranger 2.3
+    need: build-Ranger
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Download Artifact
+        use: actions/download-artifact@v3
+        with: 
+          name: Package_Ranger-Release-HBase-2.4.14
+      - name: Archive Release Content
+        uses: actions/download-artifact@v3
+        with:
+          type: tart
+          filename: Package_Ranger-Release-2.3.0-HBase-2.4.14.tar.gz
