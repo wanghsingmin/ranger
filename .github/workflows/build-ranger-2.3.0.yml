@@ -53,5 +53,22 @@ jobs:
       - name: Archive Release Content
         uses: actions/download-artifact@v3
         with:
-          type: tart
+          type: tar
           filename: Package_Ranger-Release-2.3.0-HBase-2.4.14.tar.gz
+      - name: Create Release
+        id: create_ranger_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: Ranger-Release-2.3.0-HBase-2.4.14.v${{ github.run_number }}
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_ranger_release.outputs.upload_url }}
+          asset_path: ./Package_Ranger-Release-2.3.0-HBase-2.4.14.tar.gz
+          asset_name: Package_Ranger-Release-2.3.0-HBase-2.4.14.v${{ github.run_number }}.tar.gz
+          asset_content_type: application/gzip
