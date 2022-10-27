@@ -46,12 +46,13 @@ jobs:
     needs: build-Ranger
     runs-on: ubuntu-20.04
     steps:
+      - name: Create Artifact files path
+        run: mkdir ./artifacts
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with: 
           name: Package_Ranger-Release-HBase-2.4.14
-      - name: check Download Artifact files
-        run: sudo find / -name "*Ranger-Release-HBase-2.4.14*"
+          path: ./artifacts
       - name: check Download Artifact path 
         run: ls -alh -R ./
       - name: Archive Release Content
@@ -59,9 +60,8 @@ jobs:
         with:
           type: tar
           filename: Package_Ranger-Release-2.3.0-HBase-2.4.14.tar.gz
-          exclusions: Package_Ranger-Release-2.3.0-HBase-2.4.14.tar.gz
-      - name: check Archive files
-        run: sudo find / -name "*Ranger-Release-HBase-2.4.14*"
+          path: ./artifacts
+          directory: './'
       - name: check Archive filpath es
         run: ls -alh -R ./
       - name: Create Release
