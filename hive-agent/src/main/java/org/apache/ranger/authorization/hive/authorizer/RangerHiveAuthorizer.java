@@ -1784,7 +1784,7 @@ public class RangerHiveAuthorizer extends RangerHiveAuthorizerBase {
 
 		//		case CREATEINDEX:
 		//			accessType = HiveAccessType.INDEX;
-				break;
+		//		break;
 
 				case IMPORT:
 					/*
