@@ -25,7 +25,7 @@ jobs:
         env:
           JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
         #run: mvn -DskipJSTests -DskipTests clean compile package install
-        run: mvn clean compile package -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
+        run: mvn -e -X clean compile package -Dmaven.test.skip=true -Drat.skip=true -Dpmd.skip=true -Dfindbugs.skip=true -Dspotbugs.skip=true -Dcheckstyle.skip=true
       - name: check TAR files
         run: sudo find / -name "ranger-*.tar.gz"
       - name: make folder for save assembly files
