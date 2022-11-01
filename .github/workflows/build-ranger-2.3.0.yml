@@ -7,9 +7,9 @@ on:
       - 'march-test-2.3.0'
 jobs:
   build-Ranger:
-    name: Build Ranger 2.3 with Hadoop 3.3.1,  HBase 2.4.14, and Hive 4.0.0-alpha-1
+    name: Build Ranger 2.3 with Hadoop 3.3.1, HBase 2.4.14, and Hive 4.0.0-alpha-1
     runs-on: ubuntu-20.04
-    #https://github.com/actions/runner-images 
+    #https://github.com/actions/runner-images  
     steps:
       - name: Checkout tag release-ranger-2.3.0
         uses: actions/checkout@v3
